@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    
+    .box{
+        height:500px ;
+        width:500px ;
+        border:3px solid rgba(0, 0, 255, 0.129) ;
+        background-color: rgb(186, 204, 186);
+        border-radius: 15px;
+        padding: 20px;
+        margin:50px auto;
+        text-align: center;
+        
+               
+    }
+    #name{
+        box-shadow:1px 2px 25px rgba(39, 158, 67, 0.718) ;
+    }
+    img{
+        height: 500px;
+        width: 500px;
+        margin-left: auto;
+    }
+    button:hover{
+        color: white;
+        background-color: rgb(241, 47, 47);
+        transition-duration:800ms;
+
+    }
+    #imagebox{
+        box-shadow: 1px 2px 20px 10px rgba(36, 22, 19, 0.265);;
+    }
+    button{
+        border: 0px;
+        font-size: larger;
+        box-shadow: 1px 2px 20px 1px rgb(75, 226, 110);
+        background-color: rgb(44, 235, 104);
+    }
+    #generator{
+       
+        padding:0;
+        display: inline-block;
+        position: absolute;
+        top:0 ;
+        left: 0;
+        right:0
+    }
+    #button{
+        background-color: rgba(240, 248, 255, 0);
+        border: 0px;
+    }
+  
+</style>
+<body>
+
+    <div id="name" class="box" style=" color:rgb(249, 249, 235);height:50px; background-color:rgba(11, 92, 30, 0.897); padding-bottom:50px; border:0px; ">
+
+    </div>
+    <div class="image box" id="imagebox" style="background-color:rgba(208, 195, 195, 0.405); border:0px">
+
+        <img src=""  alt="Character image">
+
+    </div>
+   <div class="box" id="button" style="position:relative">
+    <button id="generator" style="border-radius:25px; height:40px;"><strong>GENERATE CHARACTER</strong></button>
+   </div>
+    
+   
+
+    <script 
+    src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js">
+    </script>
+    <script>
+        //random numbers generator for the range of characters
+       
+
+        //JQuery
+        $(document).ready(function(){
+            
+            $(document).on("click","#generator",function (){
+
+                const number=Math.random()*88
+                const randomNumber=Math.round(number)
+
+                $.get(`https://akabab.github.io/starwars-api/api/id/${randomNumber}.json`,
+                function (data){
+                //select and change elements
+                $("#name").html(`<h1>${data.name}</h1>`)
+                $(".image").html(`<img src=${data.image}>`)
+                $("button").html("<strong>RANDOMIZE CHARACTER</strong>")
+                $("body,html").css({
+                    "height":"100%",
+                    "backgroundImage":`url(${data.image})`,
+                    "backgroundSize":"cover",
+                    "backgroundPosition":"center",
+                    
+                })
+
+            })
+
+        })  
+
+    })
+                 
+    </script>
+
+</body> 
+</html>
